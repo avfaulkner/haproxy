@@ -1,6 +1,8 @@
 # HAProxy
 
-This will configure a highly available HAProxy configuration.
+This will configure a highly available HAProxy service
+consisting of a master and slave.
+
 
 ## Requirements
 ### Tooling
