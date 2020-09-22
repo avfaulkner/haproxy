@@ -16,10 +16,10 @@ This is currently being run as a playbook from a local workstation.
 4. Modify the vars/main.yml file with the proper variables.
 5. Run the script:
 ```
-ansible-playbook -i hosts main.yml -vv
+ansible-playbook -i hosts haproxy.yml -vv
 ```
 Optional:
 Run the script against a specific host or host category in the host file
 ```
-ansible-playbook -i hosts main.yml -vv -l <instance IP>
+ansible-playbook -i hosts haproxy.yml -vv -l <instance IP or host category>
 ``` 
