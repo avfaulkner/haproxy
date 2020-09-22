@@ -1,0 +1,9 @@
+/var/log/haproxy.log {
+    daily
+    rotate 5
+    missingok
+    nodateext
+    copytruncate
+    compress
+}
+
