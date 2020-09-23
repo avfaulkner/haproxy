@@ -1,3 +1,4 @@
-haproxy_cfg_dest: /etc/haproxy/haproxy.cfg
+haproxy_cfg_dest: /etc/haproxy/haproxy.cfg.j2
 keepalived_cfg_dest: /etc/keepalived/keepalived.cfg
 notify_master_dest: /etc/keepalived/notify_master.sh
+haproxy_default_backend: lls_backend

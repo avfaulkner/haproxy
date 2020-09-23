@@ -26,8 +26,8 @@
           - keepalived
 
       - name: Install haproxy config
-        copy:
-          src: files/haproxy.cfg
+        template:
+          src: files/haproxy.cfg.j2
           dest: "{{ haproxy_cfg_dest }}"
           owner: haproxy
           group: haproxy
