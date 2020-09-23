@@ -29,9 +29,9 @@
         copy:
           src: files/haproxy.cfg
           dest: "{{ haproxy_cfg_dest }}"
-          owner: root
-          group: root
-          mode: 0644
+          owner: haproxy
+          group: haproxy
+          mode: 0664
 
       - name: Install keepalived config
         copy:
@@ -39,7 +39,7 @@
           dest: "{{ keepalived_cfg_dest }}"
           owner: root
           group: root
-          mode: 0644
+          mode: 0664
 
       - name: Notify master of ip reassignment to secondary
         copy:
