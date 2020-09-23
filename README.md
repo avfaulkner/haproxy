@@ -3,6 +3,10 @@
 This will configure a highly available HAProxy service
 consisting of a master and slave.
 
+HAProxy will handle load-balancing on layer 7.
+keepalived runs on both the active and passive servers and
+keepalived works by monitoring the heartbeat of the active server at periodic intervals. 
+
 
 ## Requirements
 ### Tooling

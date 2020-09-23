@@ -1,0 +1,81 @@
+---
+- hosts: aws-haproxy
+  become: true
+  gather_facts: false
+  vars_files:
+  - vars/main.yml
+  tasks:
+
+      - name: download haproxy
+        package:
+          name: "{{ item }}"
+          state: present
+        with_items:
+          - haproxy
+          - keepalived
+        register: service_status
+
+      - debug: var=service_status
+
+      - name: enable haproxy
+        systemd:
+          name: "{{ item }}"
+          enabled: true
+        with_items:
+          - haproxy
+          - keepalived
+
+      - name: Install haproxy config
+        copy:
+          src: files/haproxy.cfg
+          dest: "{{ haproxy_cfg_dest }}"
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: Install keepalived config
+        copy:
+          src: files/keepalived.cfg
+          dest: "{{ keepalived_cfg_dest }}"
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: Notify master of ip reassignment to secondary
+        copy:
+          src: files/notify_master.sh
+          dest: "{{ notify_master_dest }}"
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: Install haproxy rsyslog config
+        copy:
+          src: files/haproxy-rsyslog.conf
+          dest: /etc/rsyslog.d/haproxy.conf
+          owner: root
+          group: root
+          mode: 0644
+        notify:
+        - restart rsyslog
+
+      - name: Install haproxy logrotate config
+        copy:
+          src: files/haproxy.logrotate
+          dest: /etc/logrotate.d/haproxy
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: start haproxy
+        service:
+          name: haproxy
+          state: restarted
+          enabled: yes
+        tags: haproxy
+
+  handlers:
+    - name: restart rsyslog
+      service:
+        name: rsyslog
+        state: restarted
