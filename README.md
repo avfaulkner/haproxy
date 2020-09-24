@@ -1,12 +1,6 @@
-# HAProxy
+# NGINX Reverse Proxy
 
-This will configure a highly available HAProxy service
-consisting of a master and slave.
-
-HAProxy will handle load-balancing on layer 7. 
-keepalived runs on both the active and passive servers and
-works by monitoring the heartbeat of the active server at periodic intervals. 
-
+This will configure an NGINX reverse proxy. 
 
 ## Requirements
 ### Tooling
@@ -31,5 +25,5 @@ ansible-playbook -i hosts main.yml -vv -l <instance IP or host category>
 ``` 
 
 ## Notes
-- The haproxy.cfg file must be modified to suit the user's needs.
-- notify_master.sh is written for aws using aws cli. This should be converted to bash or something platform agnostic. 
+- Although this includes a self-signed certificate, it would be
+best to create your own certificates. 
