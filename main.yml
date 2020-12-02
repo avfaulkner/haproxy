@@ -6,13 +6,15 @@
   - vars/main.yml
   tasks:
 
-      - name: download haproxy
+      - name: download haproxy and dependencies
         package:
           name: "{{ item }}"
           state: present
         with_items:
           - haproxy
           - keepalived
+          - python
+          - awscli
         register: service_status
 
       - debug: var=service_status
