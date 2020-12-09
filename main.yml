@@ -13,7 +13,6 @@
         with_items:
           - haproxy
           - keepalived
-          - python
           - awscli
         register: service_status
 
